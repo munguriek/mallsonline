@@ -1,0 +1,79 @@
+{% extends "public/base.html" %}
+{% load humanize %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1><span class="table-project-n">Free Rooms in {{ head }}</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="position" data-editable="false">Building</th>
+                                            <th data-field="area" data-editable="false">Floor</th>
+                                            <th data-field="place" data-editable="false">Size</th>
+                                            <th data-field="rate" data-editable="false">Rate</th>
+                                            <th data-field="voters" data-editable="false">Status</th>
+                                            <th data-field="act" data-editable="false">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for room in rooms %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{room.name}}</td>
+                                            <td>{{room.acade}}</td>
+                                            <td>{{room.floor}}</td>
+                                            <td>{{room.size}}</td>
+                                            <td>{{room.monthly_rate|intcomma}}</td>
+                                            <td>
+                                            {% if room.status.id == 1 %}
+                                            <button class="btn btn-custon-two btn-success btn-xs" style="color: white;"><span class="adminpro-icon adminpro-checked-pro"></span> {{room.status}}
+                                            </button>
+                                            {% elif room.status.id == 2 %}
+                                            <button class="btn btn-custon-two btn-warning btn-xs" style="color: white;"><span class="adminpro-icon adminpro-warning-danger"></span> {{room.status}}
+                                            </button>
+                                            {% else %}
+                                            <button class="btn btn-custon-two btn-danger btn-xs" href="{% url 'room-details' room.id %}" style="color: white;"><span class="adminpro-icon adminpro-danger-error"></span> {{room.status}}
+                                            </button>
+                                            {% endif %}
+
+                                            </td>
+
+                                            <td>
+                                            <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'book-room' room.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Book</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

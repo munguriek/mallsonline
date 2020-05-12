@@ -1,0 +1,133 @@
+{% extends "acade_owner/base.html" %}
+{% load has_group %}
+{% load humanize %}
+{% block content %}
+<!-- income order visit user Start -->
+<div class="income-order-visit-user-area mg-t-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="sparkline13-graph shadow-reset">
+                    <canvas id="room-chart" data-url="{% url 'room-chart' %}"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                    <div class="income-title">
+                        <div class="main-income-head">
+                            <h2>Rooms</h2>
+                            <div class="main-income-phara">
+                                <p>All stats</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="income-dashone-pro">
+                        <div class="income-rate-total">
+                            <div class="price-adminpro-rate">
+                                <h3><span></span><span class="counter">{{room_count}}</span></h3>
+                            </div>
+                            <div class="price-graph">
+                                <span id="sparkline1"></span>
+                            </div>
+                        </div>
+                        <div class="income-range">
+                            <p>Free Rooms</p>
+                            <span class="income-percentange">{{free_room_count}} <i class="fa fa-bolt"></i></span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                    <div class="income-title">
+                        <div class="main-income-head">
+                            <h2>Pending Bookings</h2>
+                            <div class="main-income-phara">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="income-dashone-pro">
+                        <div class="income-rate-total">
+                            <div class="price-adminpro-rate">
+                                <h3><span></span><span class="counter">{{book_count}}</span></h3>
+                            </div>
+                            <div class="price-graph">
+                                <span id="sparkline1"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                    <div class="income-title">
+                        <div class="main-income-head">
+                            <h2>Complains</h2>
+                            <div class="main-income-phara">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="income-dashone-pro">
+                        <div class="income-rate-total">
+                            <div class="price-adminpro-rate">
+                                <h3><span></span><span class="counter">{{complain_count}}</span></h3>
+                            </div>
+                            <div class="price-graph">
+                                <span id="sparkline1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+<script>
+    $(function () {
+
+      var $roomChart = $("#room-chart");
+      $.ajax({
+        url: $roomChart.data("url"),
+        success: function (data) {
+
+          var ctx = $roomChart[0].getContext("2d");
+
+          new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: data.labels,
+              datasets: [{
+                label: 'Rent Amount Paid',
+                backgroundColor: 'blue',
+                data: data.data
+              }]          
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: 'Rent Payments Bar Chart for each room'
+              }
+            }
+          });
+
+        }
+      });
+
+    });
+
+  </script>
+
+{% endblock content %}

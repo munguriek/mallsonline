@@ -1,0 +1,77 @@
+{% extends "acade_owner/base.html" %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline13-list shadow-reset">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>{{ head }}<span class="table-project-n"> Owners</span></h1>
+                            <div class="sparkline13-outline-icon">
+                                <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="name" data-editable="false">Name</th>
+                                        <th data-field="bu" data-editable="false">Building</th>
+                                        <th data-field="floor" data-editable="false">Floor</th>
+                                        <th data-field="rooms" data-editable="false">Rooms</th>
+                                        <th data-field="place" data-editable="false">Address</th>
+                                        <th data-field="email" data-editable="false">Email</th>
+                                        <th data-field="phone" data-editable="false">Phone</th>
+                                        <th data-field="status" data-editable="false">Status</th>
+                                        <th data-field="act" data-editable="false">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for owner in owners %}
+                                    <tr>
+                                        <td></td>
+                                        <td><a href="{% url 'owner-details' owner.id %}" >{{owner.name}}</a></td>
+                                        <td>{{owner.acade}}</td>
+                                        <td>{{owner.floor}}</td>
+                                        <td>{{owner.no_of_rooms}}</td>
+                                        <td>{{owner.address}}</td>
+                                        <td>{{owner.email}}</td>
+                                        <td>{{owner.phone}}</td>
+                                        
+                                        <td>
+                                        {% if owner.status.id == 1 %}
+                                        <a class="btn btn-custon-two btn-success btn-xs" href="{% url 'owner-details' owner.id %}" style="color: white;"><span class="adminpro-icon adminpro-checked-pro"></span> {{owner.status}}
+                                        {% else %}
+                                        <a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'owner-details' owner.id %}" style="color: white;"><span class="adminpro-icon adminpro-danger-error"></span> {{owner.status}}
+                                        {% endif %}
+
+                                        </td>
+
+                                        <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'owner-details' owner.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a> <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-owner' owner.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Static Table End -->
+ <!-- welcome Project, sale area start-->
+{% endblock content %}

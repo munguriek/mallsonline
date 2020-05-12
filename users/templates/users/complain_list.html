@@ -1,0 +1,72 @@
+{% extends "acade_owner/base.html" %}
+{% load has_group %}
+{% load humanize %}
+{% block content %}
+<div class="data-table-area mg-t-40 mg-b-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sparkline13-list shadow-reset">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>{{ head }}<span class="table-project-n"> Complains</span></h1>
+                            <div class="sparkline13-outline-icon">
+                                <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                <span><i class="fa fa-wrench"></i></span>
+                                <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div id="toolbar">
+                                <select class="form-control">
+                                    <option value="">Export Basic</option>
+                                    <option value="all">Export All</option>
+                                    <option value="selected">Export Selected</option>
+                                </select>
+                            </div>
+                            <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                <thead>
+                                    <tr>
+                                        <th data-field="state" data-checkbox="true"></th>
+                                        <th data-field="name" data-editable="false">Title</th>
+                                        <th data-field="acade" data-editable="false">Room</th>
+                                        <th data-field="position" data-editable="false">Date</th>
+                                        <th data-field="area" data-editable="false">Last Updated</th>
+                                        <th data-field="act" data-editable="false">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for complain in complains %}
+                                    <tr>
+                                        <td></td>
+                                        <td><a href="{% url 'complain-details' complain.id %}" >{{complain.title}}</a></td>
+                                        <td>
+                                        {% if request.user|has_group:"Owner" %}
+                                        <a href="{% url 'tenant-details' complain.room.id %}" target="_blank">{{complain.room}}</a>
+
+                                        {% else %}
+                                        <a href="{% url 'book-room-details' complain.room.id %}" target="_blank">{{complain.room}}</a>
+
+                                        {% endif %}
+
+                                        </td>
+                                        <td>{{complain.date_created}}</td>
+                                        <td>{{complain.updated}}</td>
+
+                                        <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'complain-details' complain.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a> <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-complain' complain.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Edit</a></td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Static Table End -->
+ <!-- welcome Project, sale area start-->
+{% endblock content %}

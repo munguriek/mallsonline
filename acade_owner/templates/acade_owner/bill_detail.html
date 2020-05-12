@@ -1,0 +1,410 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="project-details-wrap shadow-reset">
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                    <div class="project-details-title">
+                        <h2><span class="profile-details-name-nn">{{ object.bill_for}}</span></h2>
+                    </div>
+                    <ul id="adminpro-demo2" class="comment-action-st collapse">
+                        <li><a href="{% url 'bill' %}">Add New Bill</a>
+                        </li>
+                        <li><a href="{% url 'bills' %}">View other Bills</a>
+                        </li>
+                        <li><a href="{% url 'update-bill' object.id %}">Update</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <div class="admin-comment-month project-details-action">
+                        <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2">More...</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Amount Paid:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="btn-group project-list-ad">
+                                    <button class="btn btn-white btn-xs">{{ object.amount_paid|intcomma}} UGX</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Balance:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="btn-group project-list-ad">
+                                    <button class="btn btn-white btn-xs">{{ object.amount_to_pay|intcomma}} UGX</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Bill Month:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.month}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Bill Year:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.year}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Building:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <a href="{% url 'acade-details' object.acade.id %}" target="_blank">{{ object.acade}} </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Paid By:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.paid_by}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Received By:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.received_by}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Phone:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.phone}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Received On:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.date_created}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-details-mg">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-st">
+                                    <span><strong>Last Updated:</strong></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-dt">
+                                    <span>{{ object.updated}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="project-pregress-details">
+                        <span><strong>Collection:</strong></span>
+                    </div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="skill-content-3 project-details-progress">
+                        <div class="skill">
+                            <div class="progress">
+                                <div class="progress-bar wow fadeInLeft" data-progress="0%" style="width: 0%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="project-details-tab">
+                        <ul class="nav nav-tabs res-pd-less-sm">
+                            <li class="active"><a data-toggle="tab" href="#tenants">Tenants</a>
+                            </li>
+                            <li><a data-toggle="tab" href="#rent">Rent</a>
+                            </li>
+                            <li><a data-toggle="tab" href="#complains">Complains</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content res-tab-content-project">
+                            <div id="tenants" class="tab-pane fade in active animated zoomInLeft">
+                                <div class="user-profile-comment-list">
+                                    <div class="row">
+                                        <div class="col-lg-4 mg-t-30">
+                                            <div class="author-permissio-wrap shadow-reset">
+                                                <div class="author-per-img">
+                                                    <a href="#"><img src="{% static 'img/notification/1.jpg' %}" alt="" />
+                                                    </a>
+                                                    <div class="author-per-content">
+                                                        <h2>Joyita Fly</h2>
+                                                        <p>coderthemes@gmail.com</p>
+                                                        <a id="group1" data-type="select" data-pk="1" data-value="5" data-source="/groups" data-title="Select group" href="#">Admin</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 mg-t-30">
+                                            <div class="author-permissio-wrap widget-ov-mg-t-30 shadow-reset">
+                                                <div class="author-per-img">
+                                                    <a href="#"><img src="{% static 'img/notification/2.jpg' %}" alt="" />
+                                                    </a>
+                                                    <div class="author-per-content">
+                                                        <h2>Fox Pro</h2>
+                                                        <p>coderthemes@gmail.com</p>
+                                                        <a id="group2" data-type="select" data-pk="1" data-value="5" data-source="/groups" data-title="Select group" href="#">Customer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 mg-t-30">
+                                            <div class="author-permissio-wrap widget-ov-mg-t-30 widget-ov-mg-t-n-30 shadow-reset">
+                                                <div class="author-per-img">
+                                                    <a href="#"><img src="{% static 'img/notification/3.jpg' %}" alt="" />
+                                                    </a>
+                                                    <div class="author-per-content">
+                                                        <h2>Khan bor</h2>
+                                                        <p>coderthemes@gmail.com</p>
+                                                        <a id="group3" data-type="select" data-pk="1" data-value="5" data-source="/groups" data-title="Select group" href="#">Support</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 mg-t-30">
+                                            <div class="author-permissio-wrap widget-ov-mg-t-30 widget-ov-mg-t-n-30 shadow-reset">
+                                                <div class="author-per-img">
+                                                    <a href="#"><img src="{% static 'img/notification/4.jpg' %}" alt="" />
+                                                    </a>
+                                                    <div class="author-per-content">
+                                                        <h2>John Das</h2>
+                                                        <p>coderthemes@gmail.com</p>
+                                                        <a id="group4" data-type="select" data-pk="1" data-value="5" data-source="/groups" data-title="Select group" href="#">Operator</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                <div id="rent" class="tab-pane fade animated bounceInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar1">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="district" data-editable="false">District</th>
+                                            <th data-field="company" data-editable="false">Constituency</th>
+                                            <th data-field="date" data-editable="false">DoB</th>
+                                            <th data-field="position" data-editable="false">Position</th>
+                                            <th data-field="area" data-editable="false">Area</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in candidates %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'candidate-details' user.id %}"><strong class="red">{{user.name}}</strong></a></td>
+                                            <td>{{user.district}}</td>
+                                            <td>{{user.constituency}}</td>
+                                            <td>{{user.date_of_birth}}</td>
+                                            <td>{{user.position}}</td>
+                                            <td>{{user.area}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+               
+                <div id="complains" class="tab-pane fade animated bounceInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar6">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar6">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="district" data-editable="false">District</th>
+                                            <th data-field="company" data-editable="false">Constituency</th>
+                                            <th data-field="date" data-editable="false">DoB</th>
+                                            <th data-field="position" data-editable="false">Position</th>
+                                            <th data-field="area" data-editable="false">Area</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for user in candidates %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'candidate-details' user.id %}"><strong class="red">{{user.name}}</strong></a></td>
+                                            <td>{{user.district}}</td>
+                                            <td>{{user.constituency}}</td>
+                                            <td>{{user.date_of_birth}}</td>
+                                            <td>{{user.position}}</td>
+                                            <td>{{user.area}}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+    <div class="project-details-descri project-details-mg-t-30 shadow-reset">
+        <h2>Project Description</h2>
+        <p>{{ object.desc}}</p>
+    </div>
+    <div class="sparkline7-list shadow-reset mg-t-30">
+        <div class="sparkline7-hd">
+            <div class="main-spark7-hd">
+                <h1>Budgets</h1>
+                <div class="sparkline7-outline-icon">
+                    <span class="sparkline7-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                    <span><i class="fa fa-wrench"></i></span>
+                    <span class="sparkline7-collapse-close"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="sparkline7-graph project-details-price-hd">
+            <div class="single-skill">
+                <div class="progress-circular">
+                    <input type="text" class="knob" value="0" data-rel="0" data-linecap="round" data-width="90" data-bgcolor="#999" data-fgcolor="#03a9f4" data-thickness=".10" data-readonly="true" disabled>
+                </div>
+                <div class="progress-circular1 project-details-price">
+                    <h2>{{ object.amount|intcomma}} UGX</h2>
+                    <p>Amount</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sparkline8-list shadow-reset mg-t-30">
+        <div class="sparkline8-hd">
+            <div class="main-spark7-hd">
+                <h1>Files</h1>
+                <div class="sparkline8-outline-icon">
+                    <span class="sparkline8-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                    <span><i class="fa fa-wrench"></i></span>
+                    <span class="sparkline8-collapse-close"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="sparkline8-graph project-details-price-hd">
+            <div class="project-details-files">
+                <div class="view-mail-file-list">
+                    <div class="view-file-in">
+                        <i class="fa fa-file"></i>
+                    </div>
+                    <div class="file-type-view">
+                        <h5><a href="#">Document-file.zip</a></h5>
+                        <p>Added: jun 18, 2018</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

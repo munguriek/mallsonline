@@ -1,0 +1,80 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="button-adminpro-area mg-b-40 mg-t-40">
+<div class="container">
+<div class="user-profile-wrap shadow-reset">
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="user-profile-img">
+                    <img src="{{ object.photo.url }}" alt="{{ object.name }}" />
+                </div>
+            </div>
+            <div class="col-lg-10">
+            <div class="col-lg-6">
+                <div class="user-profile-content">
+                    <h2>Bio Data</h2>
+                    <table  class="table small m-b-xs">
+                    <tr>
+                    <td>Name: </td><td><strong>{{ object.name }}</strong></td></tr>
+                    <tr><td>NIN: </td><td><strong>{{ object.nin }}</strong></td></tr>
+                    <tr><td>DoB: </td><td><strong>{{ object.date_of_birth }}</strong></td></tr>
+                    <tr><td>Email: </td><td><strong>{{ user.email }}</strong></td></tr>
+                    <tr><td>Employee Since: </td><td><strong>{{ user.date_joined|date:"N d, Y" }}</strong></td></tr>
+                    <tr><td>Status: </td><td>{% if object.status.id == 1 %}
+                                            <a href="{% url 'update-employee' object.id %}" class="btn btn-custon-two btn-success btn-xs">{{object.status}}</a>
+                                            {% else %}
+                                            <a href="{% url 'update-employee' object.id %}" class="btn btn-custon-two btn-danger btn-xs" target="_blank">{{object.status}}</a>
+                                            {% endif %}</td></tr>
+                    </table>
+                </div>
+                </div>
+                <div class="col-lg-6">
+    				<div class="user-profile-content">
+                    <h2>Employee Info</h2>
+                    <table  class="table small m-b-xs">
+                    <tr><td>Acade: </td><td><strong>{{ object.acade }}</strong></td></tr>
+                    <tr><td>Job Title: </td><td><strong>{{ object.role }}</strong></td></tr>
+                    <tr><td>Phone Contact: </td><td><strong>{{ object.phone }}</strong></td></tr>
+                    <tr><td>Address: </td><td><strong>{{ object.address }}</strong></td></tr>
+                    <tr><td>Last Updated: </td><td><strong>{{ object.updated }}</strong></td></tr>
+                    <tr><td>Registered By: </td><td><strong>{{ object.user.first_name }}</strong></td></tr>
+                    
+                    </table>
+                </div>
+    		</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="user-profile-social-list">
+        <H4 class="" >Projects Served</H4>
+            <table class="table small m-b-xs">
+                <tbody>
+                <tr>
+                      <th>Project</th>
+                      <th>Role</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>542</strong> Projects
+                        </td>
+                        <td>
+                            <strong>222</strong> Followers
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}

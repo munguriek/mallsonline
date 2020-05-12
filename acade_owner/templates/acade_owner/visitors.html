@@ -1,0 +1,176 @@
+{% extends "acade_owner/base.html" %}
+{% load humanize %}
+{% block content %}
+   <div class="income-order-visit-user-area mg-t-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>By Car</h2>
+                                <div class="main-income-phara">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span></span><span class="counter">200</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline1"></span>
+                                </div>
+                            </div>
+                            <div class="income-range">
+                                <p>Visitors</p>
+                                <span class="income-percentange">20% <i class="fa fa-bolt"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>By Motorcycle</h2>
+                                <div class="main-income-phara order-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">2320</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline6"></span>
+                                </div>
+                            </div>
+                            <div class="income-range order-cl">
+                                <p>Visitors</p>
+                                <span class="income-percentange">66% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>By Bicycle</h2>
+                                <div class="main-income-phara visitor-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">8200</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline2"></span>
+                                </div>
+                            </div>
+                            <div class="income-range visitor-cl">
+                                <p>Visitors</p>
+                                <span class="income-percentange">55% <i class="fa fa-level-up"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>By Foot</h2>
+                                <div class="main-income-phara low-value-cl">
+                                    <p>Today</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">88200</span></h3>
+                                </div>
+                                <div class="price-graph">
+                                    <span id="sparkline5"></span>
+                                </div>
+                            </div>
+                            <div class="income-range low-value-cl">
+                                <p>All Walk ins</p>
+                                <span class="income-percentange">33% <i class="fa fa-level-down"></i></span>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="data-table-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sparkline13-list shadow-reset">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <h1>{{ head }}<span class="table-project-n"> Visitors</span></h1>
+                                <div class="sparkline13-outline-icon">
+                                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                    <span><i class="fa fa-wrench"></i></span>
+                                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="acade" data-editable="false">Acade</th>
+                                            <th data-field="name" data-editable="false">Transport Means</th>
+                                            <th data-field="date" data-editable="false">Date</th>
+                                            <th data-field="user" data-editable="false">Recorded By</th>
+                                            <th data-field="act" data-editable="false">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for visitor in visitors %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'acade-details' visitor.acade.id %}" target="_blank">{{visitor.acade}}</a></td>
+                                            <td>{{visitor.means}}</td>
+                                            <td>{{visitor.date_created}}</td>
+                                            <td>{{visitor.user.first_name}} {{visitor.user.last_name}}</td>
+
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-visitor' visitor.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> edit</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Static Table End -->
+     <!-- welcome Project, sale area start-->
+    {% endblock content %}

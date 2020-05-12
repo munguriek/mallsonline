@@ -1,0 +1,392 @@
+{% extends 'public/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+    <div class="project-details-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                    <div class="project-details-wrap shadow-reset">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div class="project-details-title">
+                                    <h2><span class="profile-details-name-nn">{{ acade.name}}</span></h2>
+                                </div>
+                                <ul id="adminpro-demo2" class="comment-action-st collapse">
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="admin-comment-month project-details-action">
+                                    <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="project-details-st">
+                                                <img src="{{acade.photo.url}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Total Rooms:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs">{{ total_rooms}} rooms</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Free Rooms:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs">{{ total_free_rooms}} free rooms</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Total Floors:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs">{{ acade.no_of_floors}} floors</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Address:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ acade.address}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Contact:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <a href="#">{{ acade.user.userprofile.phone}} </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-details-tab">
+                                    <ul class="nav nav-tabs res-pd-less-sm">
+                                        <li class="active"><a data-toggle="tab" href="#allrooms">All Rooms</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#freerooms">Free Rooms</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#acade_acade">Shops</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#acade_visitors">Vistors</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content res-tab-content-project">
+                <div id="allrooms" class="tab-pane fade in active animated fadeInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar1">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="district" data-editable="false">Size</th>
+                                            <th data-field="company" data-editable="false">Monthly Rate</th>
+                                            <th data-field="date" data-editable="false">Floor</th>
+                                            <th data-field="status" data-editable="false">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for room in rooms %}
+                                        <tr>
+                                            <td></td>
+                                            <td><strong class="red">{{room.name}}</strong></td>
+                                            <td>{{room.size}}</td>
+                                            <td>{{room.monthly_rate}}</td>
+                                            <td>{{room.floor}}</td>
+                                            <td>{% if room.status.id == 1 %}
+                                            <button class="btn btn-custon-two btn-success btn-xs"  style="color: white;"><span class="adminpro-icon adminpro-checked-pro"></span> {{room.status}}
+                                            </button>
+                                            <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'book-room' room.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Book</a>
+                                            {% elif room.status.id == 2 %}
+                                            <button class="btn btn-custon-two btn-warning btn-xs"  style="color: white;"><span class="adminpro-icon adminpro-warning-danger"></span> {{room.status}}
+                                            </button>
+                                            {% else %}
+                                            <button class="btn btn-custon-two btn-danger btn-xs" style="color: white;"><span class="adminpro-icon adminpro-danger-error"></span> {{room.status}}
+                                            </button>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div id="freerooms" class="tab-pane fade animated fadeInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar2">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar2">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="district" data-editable="false">Size</th>
+                                            <th data-field="company" data-editable="false">Monthly Rate</th>
+                                            <th data-field="date" data-editable="false">Floor</th>
+                                            <th data-field="status" data-editable="false">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for room in free_rooms %}
+                                        <tr>
+                                            <td></td>
+                                            <td><strong class="red">{{room.name}}</strong></td>
+                                            <td>{{room.size}}</td>
+                                            <td>{{room.monthly_rate}}</td>
+                                            <td>{{room.floor}}</td>
+                                            <td>{% if room.status.id == 1 %}
+                                            <button class="btn btn-custon-two btn-success btn-xs"  style="color: white;"><span class="adminpro-icon adminpro-checked-pro"></span> {{room.status}}
+                                            </button>
+                                            <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'book-room' room.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span> Book</a>
+                                            {% elif room.status.id == 2 %}
+                                            <button class="btn btn-custon-two btn-warning btn-xs"  style="color: white;"><span class="adminpro-icon adminpro-warning-danger"></span> {{room.status}}
+                                            </button>
+                                            {% else %}
+                                            <button class="btn btn-custon-two btn-danger btn-xs" style="color: white;"><span class="adminpro-icon adminpro-danger-error"></span> {{room.status}}
+                                            </button>
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="acade_acade" class="tab-pane fade animated fadeInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar3">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar3">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="area" data-editable="false">Type of Products</th>
+                                            <th data-field="place" data-editable="false">room</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for shop in shops %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'home-shop' shop.id %}" target="_blank">{{shop.name}}</a></td>
+                                            <td>{{shop.title}}</td>
+                                            <td>{{shop.room.room}}</td>
+
+                                            <td>
+                                            <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'home-shop' shop.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="acade_visitors" class="tab-pane fade animated fadeInUp">
+                <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar7">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar7">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Transport Means</th>
+                                            <th data-field="date" data-editable="false">Date</th>
+                                            <th data-field="user" data-editable="false">Recorded By</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for visitor in visitors %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{visitor.means}}</td>
+                                            <td>{{visitor.date_created}}</td>
+                                            <td>{{visitor.user.first_name}} {{visitor.user.last_name}}</td>
+
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-visitor' visitor.id %}" style="color: white;"><span class="adminpro-icon adminpro-edit"></span></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<div class="row mg-b-30">
+<div class="project-details-descri project-details-mg-t-30 shadow-reset mg-b-30">
+        <h2>Arcades you may like</h2>
+    </div>
+{% for acade in acades %}
+<div class="project-details-wrap shadow-reset mg-b-30">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-10">
+        <div class="project-details-title">
+            <h2><span class="profile-details-name-nn">{{ acade.name}}</span></h2>
+        </div>
+        <ul id="adminpro-demo2" class="comment-action-st collapse">
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img src="{{ acade.photo.url}}">
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                     <a href="{% url 'arcade' acade.id %}" class="btn btn-custon-two btn-primary btn-xs mg-t-30">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <strong>{{acade.number_of_rooms}} free rooms</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <strong>{{acade.number_of_shops}} shops</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                       {{acade.address}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+<div class="breadcome-list shadow-reset mg-b-30">
+<div class="pagination">
+    <span class="step-links">
+        {% if acades.has_previous %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page=1">&laquo; Latest</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ acades.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+           <button class="btn btn-warning btn-xs">{{ acades.number }} of {{ acades.paginator.num_pages }}.</button>
+        </span>
+        {% if acades.has_next %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ acades.next_page_number }}">More</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ acades.paginator.num_pages }}">Older&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

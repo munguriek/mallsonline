@@ -1,0 +1,237 @@
+{% extends 'public/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+  <div class="project-details-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="project-details-wrap shadow-reset">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div class="project-details-title">
+                                    <h2><span class="profile-details-name-nn">{{ shop.name}}</span></h2>
+                                </div>
+                                <ul id="adminpro-demo2" class="comment-action-st collapse">
+                                    
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="admin-comment-month project-details-action">
+                                    <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <img src="{{ shop.photo.url}}">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Business Type:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs">{{ shop.title}} </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Room:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                {{ shop.room.room}} 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Address:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ shop.room.room.acade.address}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Contact:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ shop.user.userprofile.phone}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-descri project-details-mg-t-30">
+                                    <h2>Business Description</h2>
+                                    <p>{{ shop.body}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-details-tab">
+                                    <ul class="nav nav-tabs res-pd-less-sm">
+                                        <li class="active"><a data-toggle="tab" href="#products">Products</a>
+                                    </ul>
+                                    
+                <div id="products" class="tab-pane fade in active animated bounceInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar1">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="false"></th>
+                                            <th data-field="status" data-editable="false">Status</th>
+                                            <th data-field="name" data-editable="false">Name</th>
+                                            <th data-field="ttle" data-editable="false">Shop</th>
+                                            <th data-field="pr" data-editable="false">Price(UGX)</th>
+                                            <th data-field="date" data-editable="false">Date Uploaded</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for product in products %}
+                                        <tr>
+                                            <td><div class="support-list-img"><img src="{{product.photo.url}}"></div></td>
+                                            <td>
+                                            {% if product.status.id == 1 %}
+                                            <a class="btn btn-custon-two btn-success btn-xs" href="{% url 'product' product.id %}" style="color: white;"><span class="adminpro-icon adminpro-checked-pro"></span> {{product.status}}
+                                            </a>
+                                            {% elif product.status.id == 2 %}
+                                            <a class="btn btn-custon-two btn-warning btn-xs" href="{% url 'product' product.id %}" style="color: white;"><span class="adminpro-icon adminpro-warning-danger"></span> {{product.status}}
+                                            </a>
+                                            {% else %}
+                                            <a class="btn btn-custon-two btn-danger btn-xs" href="{% url 'product' product.id %}" style="color: white;"><span class="adminpro-icon adminpro-danger-error"></span> {{product.status}}
+                                            </a>
+                                            {% endif %}</td>
+                                            <td><a href="{% url 'product' product.id %}" >{{product.name}}</a></td>
+                                            <td><a href="{% url 'home-shop' product.shop.id %}" >{{product.shop}}</a>
+                                            </td>
+                                            <td>{{product.price|intcomma}}</td>
+                                            <td>{{product.date_created}}</td>
+
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'product' product.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+<div class="row mg-b-30">
+<div class="project-details-descri project-details-mg-t-30 shadow-reset mg-b-30">
+        <h2>Near by Shops</h2>
+    </div>
+{% for shop in shops %}
+<div class="project-details-wrap shadow-reset mg-b-30">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-10">
+        <div class="project-details-title">
+            <h2><span class="profile-details-name-nn">{{ shop.name}}</span></h2>
+        </div>
+        <ul id="adminpro-demo2" class="comment-action-st collapse">
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img src="{{ shop.photo.url}}">
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                     <a href="{% url 'home-shop' shop.id %}" class="btn btn-custon-two btn-primary btn-xs mg-t-30">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <strong>{{ shop.title}} </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        {{ shop.room.room}}. {{ shop.room.room.acade.address}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+<div class="breadcome-list shadow-reset mg-b-30">
+<div class="pagination">
+    <span class="step-links">
+        {% if shops.has_previous %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page=1">&laquo; Latest</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ shops.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+           <button class="btn btn-warning btn-xs">{{ shops.number }} of {{ shops.paginator.num_pages }}.</button>
+        </span>
+        {% if shops.has_next %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ shops.next_page_number }}">More</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ shops.paginator.num_pages }}">Older&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

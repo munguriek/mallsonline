@@ -1,0 +1,150 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="project-details-wrap shadow-reset">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <div class="project-details-title">
+                            <h2><span class="profile-details-name-nn">{{ object.name}}</span></h2>
+                        </div>
+                        <ul id="adminpro-demo2" class="comment-action-st collapse">
+                            <li><a href="{% url 'product' %}" target="_blank">Add New Product</a>
+                            </li>
+                            <li><a href="{% url 'update-product' object.id %}" target="_blank">Update</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <div class="admin-comment-month project-details-action">
+                            <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2">More...</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <img src="{{ object.photo.url}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Status:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="btn-group project-list-ad">
+                                        <button class="btn btn-white btn-xs">{{ object.status}} </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Cost:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="btn-group project-list-ad">
+                                        <button class="btn btn-white btn-xs">{{ object.cost|intcomma}} UGX</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Price:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="btn-group project-list-ad">
+                                        <button class="btn btn-white btn-xs">{{ object.price|intcomma}} UGX </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Shop:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <a href="{% url 'shop-details' object.shop.id %}" target="_blank">{{ object.shop}} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Shop Type:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">{{ object.shop.title}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Created:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.date_created}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Last Updated:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.updated}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>                      
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="row mg-b-30">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="project-details-descri project-details-mg-t-30 shadow-reset">
+                        <h2>Product Description</h2>
+                        <p>{{ object.body}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

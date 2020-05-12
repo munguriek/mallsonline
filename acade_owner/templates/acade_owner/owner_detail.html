@@ -1,0 +1,94 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="button-adminpro-area mg-b-40 mg-t-40">
+<div class="container">
+<div class="user-profile-wrap shadow-reset">
+<div class="row">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="user-profile-img">
+                    <img src="{{ object.photo.url }}" alt="{{ object.name }}" />
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="user-profile-content">
+                    <h2>{{ object.name }}</h2>
+                    <table  class="table small m-b-xs">
+                    <tr>
+                    <td class="profile-des">Building: </td><td> {{ object.acade }}</td>
+                    </tr>
+                    <tr>
+                    <td class="profile-des">Floor: </td><td>{{ object.floor }}</td>
+                    </tr>
+                    <tr> 
+                    <td class="profile-des">No. of Rooms: </td><td>{{ object.no_of_rooms }}</td> 
+                    </tr>
+                    <tr> 
+                    <td class="profile-des">Owner Address: </td><td>{{ object.address }}</td> 
+                    </tr>
+                    <tr> 
+                    <td class="profile-des">Phone Number: </td><td>{{ object.phone }}</td> 
+                    </tr>
+                    <tr> 
+                    <td class="profile-des">Email: </td><td>{{ object.email }}</td> 
+                    </tr>
+                    <tr> 
+                    <td class="profile-des">Owner Created: </td><td>{{ object.date_created }}</td> 
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="user-profile-social-list">
+        <H4 class="" >Floors Owned</H4>
+            <table class="table small m-b-xs">
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>542</strong> Projects
+                        </td>
+                        <td>
+                            <strong>222</strong> Followers
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>612</strong> Comments
+                        </td>
+                        <td>
+                            <strong>542</strong> Articles
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>254</strong> Tags
+                        </td>
+                        <td>
+                            <strong>552</strong> Friends
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="analytics-sparkle-line user-profile-sparkline">
+            <div class="analytics-content">
+                <h5>Last Payment</h5>
+                <h2 class="counter">14498009</h2>
+                <h2> <span class="counter">72</span><span>%</span></h2>
+                <div id="sparkline23"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

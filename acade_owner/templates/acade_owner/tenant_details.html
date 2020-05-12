@@ -1,0 +1,266 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="project-details-wrap shadow-reset">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                        <div class="project-details-title">
+                            <h2><span class="profile-details-name-nn">{{ object.room.name}}</span></h2>
+                        </div>
+                        <ul id="adminpro-demo2" class="comment-action-st collapse">
+                            <li><a href="#">Add Complain</a>
+                            </li>
+                            <li><a href="#">Update</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <div class="admin-comment-month project-details-action">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Status:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="btn-group project-list-ad">
+                                        <button class="btn btn-white btn-xs">{{ object.tenant_status}} </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Size:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.room.size}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Floor:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.room.floor}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Building:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <a href="{% url 'acade-details' object.room.acade.id %}" target="_blank">{{ object.room.acade}} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Owner:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        {{ object.room.user.first_name}} {{ object.room.user.last_name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Address:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        {{ object.room.user.userprofile.address}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Phone:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        {{ object.room.user.userprofile.phone}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Email:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        {{ object.room.user.email}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-+ col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Contact Person:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.person}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-+ col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong> Occupation:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.occupation}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Contact Phone:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.phone}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Address:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.address}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Date Booked:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.date_created}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Last Updated:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.updated}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-details-mg">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="project-details-st">
+                                        <span><strong>Comment:</strong></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="project-details-dt">
+                                        <span>{{ object.comment}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="project-details-descri project-details-mg-t-30 shadow-reset">
+                    <h4>Update Tenant status</h4>    
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}    
+                        <fieldset>
+                            {{ form|crispy }}
+                            <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Submit</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock content %}

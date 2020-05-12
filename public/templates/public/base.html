@@ -1,0 +1,318 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load has_group %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+        <title>AMS - {{ title }}</title>
+        {% else %}
+        <title>AMS</title>
+        {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/1.PNG' %}">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+    <!-- switcher CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <!-- Color Css Files
+		============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+</head>
+{% if user.is_authenticated %}
+{% else%}
+<style> 
+#body {
+  /*background-image: url("{% static 'img/bgac.jpg' %}");*/
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+</style>
+{% endif %}
+
+<body id="body">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Header top area start-->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <div class="admin-logo">
+                        <a href="{% url 'owner-home'  %}"><img src="{% static 'img/logo/log.png' %}" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav mai-top-nav">
+                            <li class="nav-item"><a href="{% url 'owner-home'  %}" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'home-acades'  %}" class="nav-link">Arcades</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'home-shops'  %}" class="nav-link">Shops</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'home-products'  %}" class="nav-link">Products</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-9 col-sm-6 col-xs-12">
+                    <div class="header-right-info">
+                        <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                       
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                    <span class="admin-name">{% if user.is_authenticated %}{{ user.first_name}}{% else %} Get Started{% endif %}</span>
+                                    <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                </a>
+                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url 'profile' %}"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
+                                    </li>
+                                    <li><a href="{% url 'update-profile' %}"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>Update Profile</a>
+                                    </li>
+                                    <li><a href="{% url 'logout' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{% url 'register' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Register</a>
+                                    </li>
+                                    <li><a href="{% url 'login' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Login</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+        {% if messages%}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{ message }}
+                                                
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+    </div>
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Chat Box Start-->
+    <div class="chat-list-wrap">
+        <div class="chat-list-adminpro">
+            <div class="chat-button">
+                <span data-toggle="collapse" data-target="#chat" class="chat-icon-link"><i class="fa fa-comments"></i></span>
+            </div>
+            <div id="chat" class="collapse chat-box-wrap shadow-reset animated zoomInLeft">
+                <div class="chat-main-list">
+                    <div class="chat-heading">
+                        <h2>Messanger</h2>
+                    </div>
+                    <div class="chat-content chat-scrollbar">
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:15 am</span></h3>
+                            <p>Hi, what you are doing and where are you gay?</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:10 am</span></h3>
+                            <p>Now working in graphic design with coding and you?</p>
+                        </div>
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:05 am</span></h3>
+                            <p>Practice in programming</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:02 am</span></h3>
+                            <p>That's good man! carry on...</p>
+                        </div>
+                    </div>
+                    <div class="chat-send">
+                        <input type="text" placeholder="Type..." />
+                        <span><button type="submit">Send</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chat Box End-->
+        <!-- Footer Start-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright &#169; 2019 AMS All rights reserved. Designed and Powered by <a href="https://globalautosystems.co.ug">Glabal Auto Systems</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+    <!-- jquery
+		============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+		============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+		============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+		============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+		============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script type="text/javascript">
+    var modalDiv = $("#modal-div");
+
+    $(".open-modal").on("click", function() {
+      $.ajax({
+        url: $(this).attr("data-url"),
+        success: function(data) {
+          modalDiv.html(data);
+          $("#myEdit").modal();
+        }
+      });
+    });
+    </script>
+</body>
+
+</html>

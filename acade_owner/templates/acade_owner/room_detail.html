@@ -1,0 +1,289 @@
+{% extends 'acade_owner/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %} 
+<div class="project-details-area mg-t-40 mg-b-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="project-details-wrap shadow-reset">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div class="project-details-title">
+                                    <h2><span class="profile-details-name-nn">{{ object.name}}</span></h2>
+                                </div>
+                                <ul id="adminpro-demo2" class="comment-action-st collapse">
+                                    <li><a href="{% url 'rent' object.id %}" target="_blank">Add Rent</a>
+                                    </li>
+                                    <li><a href="{% url 'update-room' object.id %}" target="_blank">Update</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <div class="admin-comment-month project-details-action">
+                                    <button class="comment-setting" data-toggle="collapse" data-target="#adminpro-demo2">More...</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Status:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="btn-group project-list-ad">
+                                                <button class="btn btn-white btn-xs">{{ object.status}} </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Floor:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ object.floor}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Building:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <a href="{% url 'acade-details' object.acade.id %}" target="_blank">{{ object.acade}} </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Size:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ object.size}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Created:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ object.date_created}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="project-details-mg">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="project-details-st">
+                                                <span><strong>Last Updated:</strong></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="project-details-dt">
+                                                <span>{{ object.updated}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-details-tab">
+                                    <ul class="nav nav-tabs res-pd-less-sm">
+                                        <li class="active"><a data-toggle="tab" href="#room_tenants">Tenants</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#room_rent">Rent</a>
+                                        </li>
+                                        <li><a data-toggle="tab" href="#room_complains">Complains</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content res-tab-content-project">
+                                        <div id="room_tenants" class="tab-pane fade in active animated zoomInLeft">
+                                            <div class="user-profile-comment-list">
+                                                <div class="row">
+                                                {% for employee in employees %}
+                                                    <div class="col-lg-4 mg-t-30">
+                                                        <div class="author-permissio-wrap shadow-reset">
+                                                            <div class="author-per-img">
+                                                                <a href="#"><img src="{{employee.user.userprofile.photo.url}}" alt="" />
+                                                                </a>
+                                                                <div class="author-per-content">
+                                                                    <h2>{{employee.person}}</h2>
+                                                                    <p>{{employee.occupation}}</p>
+                                                                    <a id="group1" data-type="select" data-pk="1" data-value="5" data-source="/groups" data-title="Select group" href="#">{{employee.business}}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                </div>
+                                                <div class="pagination">
+                                                <span class="step-links">
+                                                    {% if employees.has_previous %}
+                                                        <a class="btn btn-custon-three btn-default btn-sm" href="?page=1">&laquo; first</a>
+                                                        <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ employees.previous_page_number }}">previous</a>
+                                                    {% endif %}
+                                                    <span class="current">
+                                                        Page {{ employees.number }} of {{ employees.paginator.num_pages }}.
+                                                    </span>
+                                                    {% if employees.has_next %}
+                                                        <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ employees.next_page_number }}">next</a>
+                                                        <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ employees.paginator.num_pages }}">last &raquo;</a>
+                                                    {% endif %}
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                <div id="room_rent" class="tab-pane fade animated bounceInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar1">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar1">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="position" data-editable="false">Month</th>
+                                            <th data-field="area" data-editable="false">Year</th>
+                                            <th data-field="place" data-editable="false">Amount</th>
+                                            <th data-field="voters" data-editable="false">Balance</th>
+                                            <th data-field="by" data-editable="false">Paid by</th>
+                                            <th data-field="phone" data-editable="false">Phone</th>
+                                            <th data-field="date" data-editable="false">Date</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for rent in rents %}
+                                        <tr>
+                                            <td></td>
+                                            <td>{{rent.month}}</td>
+                                            <td>{{rent.year}}</td>
+                                            <td>{{rent.amount_paid|intcomma}}</td>
+                                            <td>{{rent.amount_to_pay|intcomma}}</td>
+                                            <td>{{rent.paid_by}}</td>
+                                            <td>{{rent.phone}}</td>
+                                            <td>{{rent.date_created|date:"N d, Y"}}</td>
+
+                                            <td> <a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'update-rent' rent.id %}" style="color: white;" ><span class="adminpro-icon adminpro-edit"></span></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+               
+                <div id="room_complains" class="tab-pane fade animated bounceInUp">
+                    <div class="project-details-completeness">
+                        <div class="sparkline13-graph">
+                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar6">
+                                    <select class="form-control">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="true" data-show-refresh="true" data-key-events="true" data-show-toggle="true" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar6">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="state" data-checkbox="true"></th>
+                                            <th data-field="name" data-editable="false">Title</th>
+                                            <th data-field="position" data-editable="false">Date</th>
+                                            <th data-field="area" data-editable="false">Last Updated</th>
+                                            <th data-field="act" data-editable="false"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for complain in complains %}
+                                        <tr>
+                                            <td></td>
+                                            <td><a href="{% url 'complain-details' complain.id %}" >{{complain.title}}</a></td>
+                                            <td>{{complain.date_created}}</td>
+                                            <td>{{complain.updated}}</td>
+
+                                            <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'complain-details' complain.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span></a>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+        <div class="income-title">
+            <div class="main-income-head">
+                <h2>Rent collected</h2>
+                <div class="main-income-phara">
+                    <p>This Month</p>
+                </div>
+            </div>
+        </div>
+        <div class="income-dashone-pro">
+            <div class="income-rate-total">
+                <div class="price-adminpro-rate">
+                    <h3><span></span><span class="counter">{{ collected|intcomma}}</span></h3>
+                </div>
+                <div class="price-graph">
+                    <span id="sparkline1"></span>
+                </div>
+            </div>
+            <div class="income-range">
+                <p>Amount</p>
+                <span class="income-percentange">UGX <i class="fa fa-bolt"></i></span>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

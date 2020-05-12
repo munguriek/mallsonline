@@ -1,0 +1,1082 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load has_group %}
+{% load humanize %}
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+        <title>AMS - {{ title }}</title>
+        {% else %}
+        <title>AMS</title>
+        {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/PNG" href="{% static 'img/1.PNG' %}">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- adminpro icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/adminpro-custon-icon.css' %}">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <!-- modals CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/modals.css' %}">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- data-table CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-table/bootstrap-editable.css' %}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <!-- charts C3 CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/c3.min.css' %}">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/form/all-type-forms.css' %}">
+    <!-- switcher CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/switcher/color-switcher.css' %}">
+    <!-- select2 CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+    <!-- datapicker CSS
+        ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/datapicker/datepicker3.css' %}">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+    <!-- Color Css Files
+		============================================ -->
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-one.css' %}" title="color-one" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-two.css' %}" title="color-two" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-three.css' %}" title="color-three" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-four.css' %}" title="color-four" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-five.css' %}" title="color-five" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-six.css' %}" title="color-six" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-seven.css' %}" title="color-seven" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-eight.css' %}" title="color-eight" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-nine.css' %}" title="color-nine" media="screen" />
+    <link rel="alternate stylesheet" type="text/css" href="{% static 'css/switcher/color-ten.css' %}" title="color-ten" media="screen" />
+</head>
+{% if user.is_authenticated %}
+{% else%}
+<style> 
+#body {
+  /*background-image: url("{% static 'img/bgac.jpg' %}");*/
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+</style>
+{% endif %}
+
+<body id="body">
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Header top area start-->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                    <div class="admin-logo">
+                        <a href="{% url 'owner-home'  %}"><img src="{% static 'img/logo/log.png' %}" alt="" />
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav mai-top-nav">
+                            <li class="nav-item"><a href="{% url 'owner-home'  %}" class="nav-link">Home</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                            {% else %}
+                            <li class="nav-item"><a href="{% url 'home-acades'  %}" class="nav-link">Arcades</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'home-shops'  %}" class="nav-link">Shops</a>
+                            </li>
+                            <li class="nav-item"><a href="{% url 'home-products'  %}" class="nav-link">Products</a>
+                            </li>
+                            <!-- <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Register</a>
+                            </li> -->
+                            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a>
+                            </li>
+                            {% endif %}
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-9 col-sm-6 col-xs-12">
+                    <div class="header-right-info">
+                        <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                       
+                            <li class="nav-item">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                    <span class="adminpro-icon adminpro-user-rounded header-riht-inf"></span>
+                                    <span class="admin-name">{% if user.is_authenticated %}{{ user.first_name}}{% else %} Get Started{% endif %}</span>
+                                    <span class="author-project-icon adminpro-icon adminpro-down-arrow"></span>
+                                </a>
+                                <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url 'profile' %}"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
+                                    </li>
+                                    <li><a href="{% url 'update-profile' %}"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>Update Profile</a>
+                                    </li>
+                                    <li><a href="{% url 'logout' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                    </li>
+                                    {% else %}
+                                    <!-- <li><a href="{% url 'register' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Register</a>
+                                    </li> -->
+                                    <li><a href="{% url 'login' %}"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Login</a>
+                                    </li>
+                                    <li class="nav-item"><a href="{% url 'password-reset' %}" class="nav-link">Forgot my password</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header top area end-->
+    {% if user.is_authenticated %}
+    {% block menu %}
+
+        <!-- Main Menu area start-->
+    <div class="main-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-tabs custom-menu-wrap">
+                    {% if request.user|has_group:"Owner" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home">Home</a>
+                        </li>
+                        <li class="{% if title == 'Acades'  %} active {% endif %}"><a data-toggle="tab" href="#acades">Arcades</a>
+                        </li>
+                        <li class="{% if title == 'Rooms'  %} active {% endif %}"><a data-toggle="tab" href="#rooms">Rooms</a>
+                        </li>
+                        <li class="{% if title == 'Owners'  %} active {% endif %}"><a data-toggle="tab" href="#owners">Owners</a>
+                        </li>
+                        <li class="{% if title == 'Tenants'  %} active {% endif %}"><a data-toggle="tab" href="#tenants">Tenants</a>
+                        </li>
+                        <li class="{% if title == 'Rent'  %} active {% endif %}"><a data-toggle="tab" href="#rent">Rent</a>
+                        </li>
+                        <li class="{% if title == 'Employees'  %} active {% endif %}"><a data-toggle="tab" href="#employees">Employees</a>
+                        </li>
+                        <li class="{% if title == 'Bills'  %} active {% endif %}"><a data-toggle="tab" href="#bills">Bills</a>
+                        </li>
+                        <li class="{% if title == 'Complains'  %} active {% endif %}"><a data-toggle="tab" href="#complains">Complains</a>
+                        </li>
+                        <li class="{% if title == 'Visitors'  %} active {% endif %}"><a data-toggle="tab" href="#visitors">Visitors</a>
+                        </li>
+                        <li class="{% if title == 'Reports'  %} active {% endif %}"><a data-toggle="tab" href="#reports">Report</a>
+                        </li>
+                    {% elif request.user|has_group:"Shop Owner" %}
+                        <li class="{% if title == 'Home'  %} active {% endif %}"><a data-toggle="tab" href="#Home">Home</a>
+                        </li>
+                        <li class="{% if title == 'Free Rooms'  %} active {% endif %}"><a data-toggle="tab" href="#Usersrooms">Rooms</a>
+                        </li>
+                        <li class="{% if title == 'Shops'  %} active {% endif %}"><a data-toggle="tab" href="#Shop">Shop</a>
+                        </li>
+                        <li class="{% if title == 'Products'  %} active {% endif %}"><a data-toggle="tab" href="#Products">Products</a>
+                        </li>
+                        <li class="{% if title == 'Complains'  %} active {% endif %}"><a data-toggle="tab" href="#complains">Complains</a>
+                        </li>
+                    {% else %}
+                    {% endif %}
+
+
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane {% if title == 'Home'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'owner-home'  %}">Home</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        <div id="acades" class="tab-pane {% if title == 'Acades'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'acade'  %}">Add Arcade</a></li>
+                                <li><a href="{% url 'acades'  %}">My Arcades</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="rooms" class="tab-pane {% if title == 'Rooms'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'room'  %}">Add Room</a>
+                                </li>
+                                <li><a href="{% url 'rooms'  %}">All Rooms</a>
+                                </li>
+                                <li><a href="{% url 'free-rooms'  %}">Free Rooms</a>
+                                </li>
+                                <li><a href="{% url 'occupied-rooms'  %}">Occupied Rooms</a>
+                                </li>
+                                <li><a href="{% url 'unavailable-rooms'  %}">Unavailable Rooms</a>
+                                </li>
+                                <li><a href="{% url 'booking'  %}">Booking Requests</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="owners" class="tab-pane {% if title == 'Owners'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'owner'  %}">Add Owner</a>
+                                </li>
+                                <li><a href="{% url 'owners'  %}">All Owners</a>
+                                </li>
+                                <li><a href="{% url 'current-owners'  %}">Current Owners</a>
+                                </li>
+                                <li><a href="{% url 'previous-owners'  %}">Previous Owners</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="tenants" class="tab-pane {% if title == 'Tenants'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'booking'  %}">Booking Requests</a>
+                                </li>
+                                <li><a href="{% url 'pending-booking'  %}">Pending Bookings</a>
+                                </li>
+                                <li><a href="{% url 'rejected-booking'  %}">Rejected Bookings</a>
+                                </li>
+                                <li><a href="{% url 'tenants'  %}">All Tenants</a>
+                                </li>
+                                <li><a href="{% url 'current-tenants'  %}">Current Tenants</a>
+                                </li>
+                                <li><a href="{% url 'previous-tenants'  %}">Previous Tenants</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="rent" class="tab-pane {% if title == 'Rent'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'rooms' %}">Add Rent</a>
+                                </li>
+                                <li><a href="{% url 'rents' %}">View Rent</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="employees" class="tab-pane {% if title == 'Employees'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'employee' %}">Add Employee</a>
+                                </li>
+                                <li><a href="{% url 'employees' %}">All Employees</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="bills" class="tab-pane {% if title == 'Bills'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'bill' %}">Add Bill</a>
+                                </li>
+                                <li><a href="{% url 'bills' %}">All Bills</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="visitors" class="tab-pane {% if title == 'Visitors'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li><a href="{% url 'visitor' %}">Add Visitor</a>
+                                </li>
+                                <li><a href="{% url 'visitors' %}">View Visitors</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="complains" class="tab-pane {% if title == 'Complains'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                            {% if request.user|has_group:"Owner" %}
+                                <li class="active" ><a href="{% url 'user-complains' %}">Tenant complains</a>
+                                {% else %}
+                                <li class="active" ><a href="{% url 'complain' %}">Raise a complain</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-complains' %}">My complains</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div id="reports" class="tab-pane {% if title == 'Reports'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                            {% if request.user|has_group:"Owner" %}
+                                <li class="active" ><a href="{% url 'rents-report'  %}">Rent Report</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'bills-report'  %}">Bills Report</a>
+                                </li>
+                                {% else %}
+                                 <li class="active" ><a href="">Rent Report</a>
+                                </li>
+                                <li class="active" ><a href="">Products Report</a>
+                                </li>
+                                <li class="active" ><a href="">Sales Report</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div id="Usersrooms" class="tab-pane {% if title == 'Free Rooms'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'users-free-rooms'  %}">Find a free room</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-rooms'  %}">My rooms</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Shop" class="tab-pane {% if title == 'Shops'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'shop' %}">Create a shop</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-shops' %}">My Shops</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Products" class="tab-pane {% if title == 'Products'  %} in active {% endif %} tab-custon-menu-bg animated flipInX">
+                            <ul class="main-menu-dropdown">
+                                <li class="active" ><a href="{% url 'product' %}">Add Products</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-products' %}">My Products</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Mob Menu -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="mobile-menu">
+                <nav id="dropdown">
+                    <ul class="mobile-menu-nav">
+                    {% if request.user|has_group:"Owner" %}
+                        <li><a data-toggle="collapse" data-target="#Home" href="#">Home <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+
+                            <ul id="Home" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="">Home</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#acades" href="#">Acades <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="acades" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'acade'  %}">Add Acade</a></li>
+                                <li><a href="{% url 'acades'  %}">View Acades</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#rooms" href="#">Rooms <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="rooms" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'room'  %}">Add Room</a>
+                                </li>
+                                <li><a href="{% url 'rooms'  %}">All Rooms</a>
+                                </li>
+                                <li><a href="{% url 'free-rooms'  %}">Free Rooms</a>
+                                </li>
+                                <li><a href="{% url 'occupied-rooms'  %}">Occupied Rooms</a>
+                                </li>
+                                <li><a href="{% url 'unavailable-rooms'  %}">Unavailable Rooms</a>
+                                </li>
+                                <li><a href="{% url 'booking'  %}">Booking Requests</a>
+                                </li>
+                            </ul>
+
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#owners" href="#">Owner <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="owners" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'owner'  %}">Add Owner</a>
+                                </li>
+                                <li><a href="{% url 'owners'  %}">All Owners</a>
+                                </li>
+                                <li><a href="{% url 'current-owners'  %}">Current Owners</a>
+                                </li>
+                                <li><a href="{% url 'previous-owners'  %}">Previous Owners</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#tenants" href="#">Tenants <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="tenants" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'booking'  %}">Booking Requests</a>
+                                </li>
+                                <li><a href="{% url 'pending-booking'  %}">Pending Bookings</a>
+                                </li>
+                                <li><a href="{% url 'rejected-booking'  %}">Rejected Bookings</a>
+                                </li>
+                                <li><a href="{% url 'tenants'  %}">All Tenants</a>
+                                </li>
+                                <li><a href="{% url 'current-tenants'  %}">Current Tenants</a>
+                                </li>
+                                <li><a href="{% url 'previous-tenants'  %}">Previous Tenants</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><a data-toggle="collapse" data-target="#rents" href="#">Rent <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="rents" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'rooms' %}">Add Rent</a>
+                                </li>
+                                <li><a href="{% url 'rents' %}">View Rent</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#employees" href="#">Employees <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="employees" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'employee' %}">Add Employee</a>
+                                </li>
+                                <li><a href="{% url 'employees' %}">All Employees</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#bills" href="#">Bills <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="bills" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'bill' %}">Add Bill</a>
+                                </li>
+                                <li><a href="{% url 'bills' %}">All Bills</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#complains" href="#">Complains <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="complains" class="collapse dropdown-header-top">
+                            {% if request.user|has_group:"Owner" %}
+                                <li class="active" ><a href="{% url 'complain' %}">Raise an Announcement/Complain</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'user-complains' %}">Tenant complains</a>
+                                <li class="active" ><a href="{% url 'my-complains' %}">My complains</a>
+                                </li>
+                                {% else %}
+                                <li class="active" ><a href="{% url 'complain' %}">Raise a complain</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-complains' %}">My complains</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#visitors" href="#">Visitors <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="visitors" class="collapse dropdown-header-top">
+                                <li><a href="{% url 'visitor' %}">Add Visitor</a>
+                                </li>
+                                <li><a href="{% url 'visitors' %}">View Visitors</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#reports" href="#">Reports <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="reports" class="collapse dropdown-header-top">
+                            {% if request.user|has_group:"Owner" %}
+                                <li class="active" ><a href="{% url 'rents-report'  %}">Rent Report</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'bills-report'  %}">Bills Report</a>
+                                </li>
+                                {% else %}
+                                 <li class="active" ><a href="">Rent Report</a>
+                                </li>
+                                <li class="active" ><a href="">Products Report</a>
+                                </li>
+                                <li class="active" ><a href="">Sales Report</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a data-toggle="collapse" data-target="#Home" href="#">Home <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+
+                            <ul id="Home" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="">Home</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#Userrooms" href="#">Rooms <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="Userrooms" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="{% url 'users-free-rooms'  %}">Find a free room</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-rooms'  %}">My rooms</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><a data-toggle="collapse" data-target="#shop" href="#">Shop <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="shop" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="{% url 'shop' %}">Create a shop</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-shops' %}">My Shops</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#products" href="#">Products <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                        <ul id="products" class="collapse dropdown-header-top">
+                                <li class="active" ><a href="{% url 'product' %}">Add Products</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-products' %}">My Products</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-toggle="collapse" data-target="#complains" href="#">Complains <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                            <ul id="complains" class="collapse dropdown-header-top">
+                            {% if request.user|has_group:"Owner" %}
+                                <li class="active" ><a href="{% url 'complain' %}">Raise an Announcement/Complain</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'user-complains' %}">Tenant complains</a>
+                                <li class="active" ><a href="{% url 'my-complains' %}">My complains</a>
+                                </li>
+                                {% else %}
+                                <li class="active" ><a href="{% url 'complain' %}">Raise a complain</a>
+                                </li>
+                                <li class="active" ><a href="{% url 'my-complains' %}">My complains</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
+
+
+                    </ul>
+                    </nav>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock menu %}
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12">
+        {% if messages%}
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">
+                    {{ message }}
+                                                
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+    </div>
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Chat Box Start-->
+    <div class="chat-list-wrap">
+        <div class="chat-list-adminpro">
+            <div class="chat-button">
+                <span data-toggle="collapse" data-target="#chat" class="chat-icon-link"><i class="fa fa-comments"></i></span>
+            </div>
+            <div id="chat" class="collapse chat-box-wrap shadow-reset animated zoomInLeft">
+                <div class="chat-main-list">
+                    <div class="chat-heading">
+                        <h2>Messanger</h2>
+                    </div>
+                    <div class="chat-content chat-scrollbar">
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:15 am</span></h3>
+                            <p>Hi, what you are doing and where are you gay?</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:10 am</span></h3>
+                            <p>Now working in graphic design with coding and you?</p>
+                        </div>
+                        <div class="author-chat">
+                            <h3>Monica <span class="chat-date">10:05 am</span></h3>
+                            <p>Practice in programming</p>
+                        </div>
+                        <div class="client-chat">
+                            <h3>Mamun <span class="chat-date">10:02 am</span></h3>
+                            <p>That's good man! carry on...</p>
+                        </div>
+                    </div>
+                    <div class="chat-send">
+                        <input type="text" placeholder="Type..." />
+                        <span><button type="submit">Send</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+{% if title %}
+    {% if title == 'Register' %}
+
+<div class="button-adminpro-area mg-t-30 mg-b-30">
+<div class="container">
+<div class="row">
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <!-- <h4>Please Create an account to Join!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                <div>                    
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Register</button>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Already have an account</a>
+                </div>
+                    <a style="margin-bottom: 5%; margin: 5%;" href="{% url 'password-reset' %}">Forgot my password</a>
+                </fieldset>
+            </form> -->
+    <div class="alert alert-danger">
+      <h5>You need get an account from the system's admin or <a href="{% url 'login' %}">Login here</a></h5>  
+    </div>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% elif title == 'Logged out' %}
+<div class="row mg-t-40 mg-b-40"></div>
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login again! or Register!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <a class="btn btn-success" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% elif title == 'Password reset' %}
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap shadow-reset mg-b-40 mg-t-40">
+
+        <h4>Please Enter your email!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Request Password Reset</button>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% elif title == 'Enter new password' %}
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap shadow-reset mg-b-40 mg-t-40">
+
+        <h4>Enter new password!</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Reset Password</button>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+
+{% elif title == 'Password reset sent' %}
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-12">
+<div class="alert alert-success">
+<h5>An Email has been sent with instructions to reset password. Please check your email</h5>
+</div> 
+</div>
+</div>
+</div>
+</div>
+
+{% elif title == 'Password reset complete' %}
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-12">
+<div class="alert alert-success">
+<h5>Your password has been reset. Please <a href="{% url 'login' %}">login Here!</a></h5>
+</div> 
+</div>
+</div>
+</div>
+</div>
+
+    {% elif title == 'Home' %}
+<div class="button-adminpro-area mg-t-40">
+<div class="container">
+<div class="row">
+<!-- Products Area -->
+<div class="row">
+<div class="col-md-4 mg-b-30" >
+{% for product in products %}
+<div class="project-details-wrap shadow-reset mg-b-30">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-10">
+        <div class="project-details-title">
+            <h2><span class="profile-details-name-nn">{{ product.name}}</span></h2>
+        </div>
+        <ul id="adminpro-demo2" class="comment-action-st collapse">
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <img src="{{ product.photo.url}}">
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        On: {{ product.date_created|date:"N d, Y"}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        Contact: {{ product.user.userprofile.phone}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <a href="{% url 'product' product.id %}" class="btn btn-white btn-xs">More Details </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <button class="btn btn-white btn-xs">{{ product.price|intcomma}} UGX </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        <strong>{{ product.shop}} </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-details-mg">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="btn-group project-list-ad">
+                        {{ product.shop.room.room}}. {{ product.shop.room.room.acade.address}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+<div class="breadcome-list shadow-reset mg-b-30">
+<div class="pagination">
+    <span class="step-links">
+        {% if products.has_previous %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page=1">&laquo; Latest</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ products.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="current">
+           <button class="btn btn-warning btn-xs">{{ products.number }} of {{ products.paginator.num_pages }}.</button>
+        </span>
+        {% if products.has_next %}
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ products.next_page_number }}">More</a>
+            <a class="btn btn-custon-three btn-default btn-sm" href="?page={{ products.paginator.num_pages }}">Older&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-lg-8 mg-b-30">
+    <div class="sparkline13-list shadow-reset">
+        <div class="sparkline13-hd">
+            <div class="main-sparkline13-hd">
+                <h1><span class="table-project-n"> Top Acades</span></h1>
+                <div class="sparkline13-outline-icon">
+                    <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                    <span><i class="fa fa-wrench"></i></span>
+                    <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="sparkline13-graph">
+            <div class="datatable-dashv1-list custom-datatable-overright">
+                <div id="toolbar">
+                <select class="form-control">
+                    <option value="">Export Basic</option>
+                    <option value="all">Export All</option>
+                    <option value="selected">Export Selected</option>
+                    </select>
+                </div>
+                <table id="table" data-toggle="table" data-pagination="true" data-search="true" data-show-columns="true" data-show-pagination-switch="false" data-show-refresh="true" data-key-events="false" data-show-toggle="false" data-resizable="true" data-cookie="true" data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true" data-toolbar="#toolbar">
+                    <thead>
+                        <tr>
+                            <th data-field="state" data-checkbox="false"></th>
+                            <th data-field="name" data-editable="false">Name</th>
+                            <th data-field="position" data-editable="false">Address</th>
+                            <th data-field="floors" data-editable="false">Floors</th>
+                            <th data-field="rooms" data-editable="false">Free Rooms</th>
+                            <th data-field="shops" data-editable="false">Shops</th>
+                            <th data-field="act" data-editable="false"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for acade in acades %}
+                        <tr>
+                        <td><div class="support-list-img"><img src="{{acade.photo.url}}"></div></td>
+                        <td><a href="{% url 'arcade' acade.id %}" >{{acade.name}}</a></td>
+                        <td>{{acade.address}}</td>
+                        <td><button class="btn btn-warning btn-xs">{{acade.no_of_floors}}</button></td>
+                        {% if acade.number_of_rooms == 0 %}
+                        <td><button class="btn btn-success btn-xs">{{acade.number_of_rooms}}</button></td>
+                        {% else %}
+                        <td><a href="{% url 'home-rooms' acade.id %}"  style="color: white;" class="btn btn-danger btn-xs">{{acade.number_of_rooms}}</a></td>
+                        {% endif %}
+                        {% if acade.number_of_shops == 0 %}
+                        <td><button class="btn btn-success btn-xs">{{acade.number_of_shops}}</button></td>
+                        {% else %}
+                        <td><a href="{% url 'arcade-shops' acade.id %}"  style="color: white;" class="btn btn-danger btn-xs">{{acade.number_of_shops}}</a></td>
+                        {% endif %}
+                        <td><a class="btn btn-custon-two btn-primary btn-xs" href="{% url 'arcade' acade.id %}" style="color: white;"><span class="adminpro-icon adminpro-informatio"></span> view</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div> 
+</div>
+</div>
+</div>
+</div>
+</div>
+    {% else %}
+
+<div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login or Create account</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                <fieldset>
+                <div>
+                <a class="btn btn-success" style="margin-bottom: 5%; margin: 5%;" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                </div>
+                <a style="margin-bottom: 5%; margin: 5%;" href="{% url 'password-reset' %}">Forgot my password</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+{% else %}
+ <div class="button-adminpro-area mg-t-40 mg-b-40">
+<div class="container mg-t-40 mg-b-40">
+<div class="row mg-t-40 mg-b-40">
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+<div class="button-ad-wrap mg-b-40 mg-t-40">
+
+        <h4>Please Login to get Started</h4>    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}    
+                <fieldset>
+                    {{ form|crispy }}
+                    <div>
+                    <button class="btn btn-success mg-b-4 " style="margin-bottom: 5%; margin: 5%;" type="submit">Login</button>
+                    <a class="btn btn-primary" style="margin-bottom: 5%; margin: 5%;" href="{% url 'register' %}">Dont have an account</a>
+                    </div>
+                    <a style="margin-bottom: 5%; margin: 5%;" href="{% url 'password-reset' %}">Forgot my password</a>
+                </fieldset>
+            </form>
+        </div> 
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+{% endif %}
+
+    <!-- Chat Box End-->
+        <!-- Footer Start-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright &#169; 2019 AMS All rights reserved. Designed and Powered by <a href="https://globalautosystems.co.ug">Glabal Auto Systems</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+    <!-- jquery
+		============================================ -->
+    <script src="{% static 'js/vendor/jquery-1.11.3.min.js' %}"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="{% static 'js/counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/counterup/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/counterup/counterup-active.js' %}"></script>
+    <!-- peity JS
+		============================================ -->
+    <script src="{% static 'js/peity/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'js/peity/peity-active.js' %}"></script>
+        <!-- rounded-counter JS
+        ============================================ -->
+    <script src="{% static 'js/rounded-counter/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/jquery.appear.js' %}"></script>
+    <script src="{% static 'js/rounded-counter/knob-active.js' %}"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="{% static 'js/sparkline/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'js/sparkline/sparkline-active.js' %}"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="{% static 'js/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.spline.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'js/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'js/flot/Chart.min.js' %}"></script>
+    <script src="{% static 'js/flot/flot-active.js' %}"></script>
+    <!-- map JS
+		============================================ -->
+    <script src="{% static 'js/map/raphael.min.js' %}"></script>
+    <script src="{% static 'js/map/jquery.mapael.js' %}"></script>
+    <script src="{% static 'js/map/france_departments.js' %}"></script>
+    <script src="{% static 'js/map/world_countries.js' %}"></script>
+    <script src="{% static 'js/map/usa_states.js' %}"></script>
+    <script src="{% static 'js/map/map-active.js' %}"></script>
+    <!-- data table JS
+		============================================ -->
+    <script src="{% static 'js/data-table/bootstrap-table.js' %}"></script>
+    <script src="{% static 'js/data-table/tableExport.js' %}"></script>
+    <script src="{% static 'js/data-table/data-table-active.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-editable.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-resizable.js' %}"></script>
+    <script src="{% static 'js/data-table/colResizable-1.5.source.js' %}"></script>
+    <script src="{% static 'js/data-table/bootstrap-table-export.js' %}"></script>
+    <!-- switcher JS
+		============================================ -->
+    <script src="{% static 'js/switcher/styleswitch.js' %}"></script>
+    <script src="{% static 'js/switcher/switch-active.js' %}"></script>
+    <!-- select2 JS
+        ============================================ -->
+    <script src="{% static 'js/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'js/select2/select2-active.js' %}"></script>
+    <!-- datapicker JS
+        ============================================ -->
+    <script src="{% static 'js/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/datapicker/datepicker-active.js' %}"></script>
+    <!-- modal JS
+        ============================================ -->
+    <script src="{% static 'js/modal-active.js' %}"></script>
+    <!-- icheck JS
+        ============================================ -->
+    <script src="{% static 'js/icheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/icheck/icheck-active.js' %}"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="{% static 'js/main.js' %}"></script>
+  
+
+    <script type="text/javascript">
+    var modalDiv = $("#modal-div");
+
+    $(".open-modal").on("click", function() {
+      $.ajax({
+        url: $(this).attr("data-url"),
+        success: function(data) {
+          modalDiv.html(data);
+          $("#myEdit").modal();
+        }
+      });
+    });
+    </script>
+</body>
+
+</html>
